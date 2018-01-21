@@ -13,13 +13,14 @@ function add_column(col_data) {
     box.append(input);
     $(this).after(box);
 
-    var textContainer = document.querySelector('.textarea-container');
-    var textareaSize = textContainer.querySelector('.textarea-size');
-    var input = textContainer.querySelector('textarea');
+    var textContainer = input.find(".textarea-container")[0];
+    var textareaSize = input.find(".textarea-size")[0];
+    var txtarea = input.find('textarea')[0];
 
-
-    input.addEventListener('input', function (evt) {
-      autoSize(textContainer, textareaSize, input)
+    console.log(txtarea);
+    txtarea.addEventListener('input', function (evt) {
+      console.log("input event");
+      autoSize(textContainer, textareaSize, txtarea);
     });
   });
 
@@ -28,31 +29,42 @@ function add_column(col_data) {
 
   if (col_data) {
     for (var box_index = 0; box_index < col_data['column']['list'].length; box_index++) {
-      console.log(col_data['column']['list'][box_index]);
-      var box = $('<li class="box">');
-      var auto_grow_text_str = '<div class="textarea-container"><textarea></textarea><div class="textarea-size"></div></div>';
+      // Because javascript is weird? closures and mutables or something.
+      (function (box_index) {
+        //console.log(col_data['column']['list'][box_index]);
+        var box = $('<li class="box">');
+        var auto_grow_text_str = '<div class="textarea-container"><textarea></textarea><div class="textarea-size"></div></div>';
 
-      var input = $(auto_grow_text_str);
-      box.append(input);
+        var input = $(auto_grow_text_str);
+        box.append(input);
 
-      col.append(box);
+        col.append(box);
 
-      input.find('textarea').val(col_data['column']['list'][box_index]);
-      var textContainer = document.querySelector('.textarea-container');
-      var textareaSize = textContainer.querySelector('.textarea-size');
-      var input = textContainer.querySelector('textarea');
+        input.find('textarea').val(col_data['column']['list'][box_index]);
 
+        var textContainer = input.find(".textarea-container")[0];
+        var textareaSize = input.find(".textarea-size")[0];
+        var txtarea = input.find('textarea')[0];
 
-      input.addEventListener('input', function (evt) {
-        autoSize(textContainer, textareaSize, input)
-      });
+        //console.log(txtarea);
+        autoSize(textContainer, textareaSize, txtarea);
+
+        txtarea.addEventListener('input', function (evt) {
+          autoSize(textContainer, textareaSize, txtarea);
+          save(build_data_obj());
+        });
+      })(box_index);
+
     }
   }
 
-  console.log("calling sortable");
+  //console.log("calling sortable");
   $(function () {
     col.sortable({
-      connectWith: ".column"
+      connectWith: ".column",
+      stop: function () {
+        save(build_data_obj())
+      }
     });
     col.disableSelection();
   });
@@ -63,12 +75,16 @@ $("#add_column_btn").click(function () {
   add_column();
 });
 
-$("#save_btn").click(function(){
+$("#save_btn").click(function () {
   save(build_data_obj());
 });
 
 $(function () {
-  col_container.sortable();
+  col_container.sortable({
+    stop: function () {
+      save(build_data_obj());
+    }
+  });
   col_container.disableSelection();
 });
 
@@ -114,7 +130,7 @@ function load() {
 }
 
 
-$(document).ready(function(){
+$(document).ready(function () {
   load();
 });
 
