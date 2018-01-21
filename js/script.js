@@ -22,6 +22,7 @@ function add_column(col_data) {
       console.log("input event");
       autoSize(textContainer, textareaSize, txtarea);
     });
+    save(build_data_obj());
   });
 
   col.append(add_box_btn);
@@ -64,7 +65,7 @@ function add_column(col_data) {
     col.sortable({
       connectWith: ".column",
       stop: function () {
-        save(build_data_obj())
+        save(build_data_obj());
       }
     });
     col.disableSelection();
@@ -76,9 +77,7 @@ $("#add_column_btn").click(function () {
   add_column();
 });
 
-$("#save_btn").click(function () {
-  save(build_data_obj());
-});
+
 
 $(function () {
   col_container.sortable({
