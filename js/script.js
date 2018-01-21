@@ -30,6 +30,7 @@ function add_column(col_data) {
   if (col_data) {
     for (var box_index = 0; box_index < col_data['column']['list'].length; box_index++) {
       // Because javascript is weird? closures and mutables or something.
+      // wrap it in an anonymous function and it's happy.
       (function (box_index) {
         //console.log(col_data['column']['list'][box_index]);
         var box = $('<li class="box">');
