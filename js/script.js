@@ -2,8 +2,11 @@ var col_container = $("#column_container");
 
 
 function add_column(col_data) {
-  var col = $('<li class="is-one-fifth column"><ul class=""></li>');
+
+  //var col_wrapper = $('<div class="col_wrapper is-one-fifth ">');
+  var col = $('<li class="column is-one-fifth"><ul class=""></li>');
   var add_box_btn = $('<a class="is-fixed-bottom button add_box_btn">Add Box</a>');
+  var title = $('<input class="column_title" type="text">');
 
   add_box_btn.click(function () {
     console.log("addbox");
@@ -25,10 +28,17 @@ function add_column(col_data) {
     save(build_data_obj());
   });
 
+  title[0].addEventListener('input', function(){
+      save(build_data_obj());
+  });
+
+  col.append(title);
   col.append(add_box_btn);
+
   col_container.append(col);
 
   if (col_data) {
+    title.val(col_data['column']['name']);
     for (var box_index = 0; box_index < col_data['column']['list'].length; box_index++) {
       // Because javascript is weird? closures and mutables or something.
       // wrap it in an anonymous function and it's happy.
@@ -93,7 +103,7 @@ function build_data_obj() {
   var cols_data_obj = {'columns': []};
   var cols = $(".column");
   cols.each(function (col) {
-    var col_data_obj = {'column': {'name': '', 'list': []}};
+    var col_data_obj = {'column': {'name': $(this).find('.column_title').val(), 'list': []}};
     $(this).find("textarea").each(function () {
       col_data_obj['column']['list'].push($(this).val());
 
