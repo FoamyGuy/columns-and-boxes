@@ -35,7 +35,9 @@ function add_column(col_data) {
   col.append(title);
   col.append(add_box_btn);
 
+  var ps = new PerfectScrollbar(col[0]);
   col_container.append(col);
+
 
   if (col_data) {
     title.val(col_data['column']['name']);
@@ -142,7 +144,22 @@ function load() {
 
 $(document).ready(function () {
   load();
+
+
+  var ps = new PerfectScrollbar("#column_container");
+    /*function updateSize() {
+      var width = parseInt($('#width').value, 10);
+      var height = parseInt($('#height').value, 10);
+
+      $('#container').style.width = width + 'px';
+      $('#container').style.height = height + 'px';
+
+      ps.update();
+    }*/
 });
+
+
+
 
 /**********************
 
