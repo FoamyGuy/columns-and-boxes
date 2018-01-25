@@ -4,7 +4,7 @@ var col_container = $("#column_container");
 function add_column(col_data) {
 
   //var col_wrapper = $('<div class="col_wrapper is-one-fifth ">');
-  var col = $('<li class="column is-one-fifth"><ul class=""></li>');
+  var col = $('<li class="column is-one-fifth"><ul></ul></li>');
   var add_box_btn = $('<a class="is-fixed-bottom button is-link add_box_btn">Add Box</a>');
   var title = $('<input class="column_title" placeholder="Title" type="text">');
 
