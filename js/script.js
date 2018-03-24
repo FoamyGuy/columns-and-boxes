@@ -8,6 +8,7 @@ function add_column(col_data) {
   var add_box_btn = $('<a class="is-fixed-bottom button is-link add_box_btn">Add Box</a>');
   var title = $('<input class="column_title" placeholder="Title" type="text">');
 
+
   add_box_btn.click(function () {
     console.log("addbox");
     var box = $('<li class="box">');
@@ -26,6 +27,9 @@ function add_column(col_data) {
       autoSize(textContainer, textareaSize, txtarea);
     });
     save(build_data_obj());
+  });
+  col.dblclick(function(){
+    add_box_btn.click()
   });
 
   title[0].addEventListener('input', function(){
@@ -125,14 +129,25 @@ function build_data_obj() {
 
 }
 
+function get_page_from_url(){
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var page = url.searchParams.get("page");
+  console.log("found: " + page);
+  return page;
+}
+
 function save(data) {
   myStorage = window.localStorage;
-  myStorage.setItem('data', JSON.stringify(data));
+  myStorage.setItem(get_page_from_url(), JSON.stringify(data));
 }
 
 function load() {
   myStorage = window.localStorage;
-  data = JSON.parse(myStorage.getItem('data'));
+  var page = get_page_from_url();
+  console.log("loading: " + page);
+
+  data = JSON.parse(myStorage.getItem(page));
 
   for (var col_index = 0; col_index < data['columns'].length; col_index++) {
     // console.log(data['columns'][i]);
@@ -142,8 +157,14 @@ function load() {
 }
 
 
+
 $(document).ready(function () {
-  load();
+  if (get_page_from_url() == null){
+    window.location = "pages.html";
+  }else{
+    load();
+  }
+
 
 
   var ps = new PerfectScrollbar("#column_container");

@@ -7,6 +7,7 @@ html, body {
 
 .navbar{
     background-color: #4a4a4a;
+    margin-bottom: 10px;
 }
 
 
@@ -126,4 +127,31 @@ textarea {
       (pre-wrap, normal, pre-line) already set */
     word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+
+#new_page_name_txt{
+    background-color: #696969;
+    color: white;
+    margin: 10px;
+}
+#new_page_name_txt::placeholder{
+    color: #aaaaaa;
+}
+#pages_container a:hover{
+    color: #22509a;
+}
+
+#pages_container{
+    color: white;
+    padding: 40px;
+}
+
+#hello-div h1{
+    color: #aaaaaa;
+    font-size: 2em;
+}
+#hello-div p{
+    color: #aaaaaa;
+    font-size: 1.0em;
 }

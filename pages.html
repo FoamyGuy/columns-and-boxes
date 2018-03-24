@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <link href="css/bulma.css" rel="stylesheet">
+  <link href="css/jquery-ui.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <link href="css/perfect-scrollbar.css" rel="stylesheet">
+  <script src="js/perfect-scrollbar.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="navigation">
+  <div class="navbar-menu">
+    <!--<div class="navbar-start">
+      <div class="navbar-item is-active">
+        <a class="navbar-link">
+          Left
+        </a>
+      </div>
+    </div>-->
+
+    <div class="start">
+      <div class="navbar-item is-active">
+
+        <div class="is-left">
+          <a id="add_page_btn" class="button is-link">
+            Add Page
+          </a>
+        </div>
+        <div class="is-left">
+          <input id="new_page_name_txt" type="text" placeholder="Page Name">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<section class="is-primary columns">
+  <ul id="pages_container" class="column is-4">
+  </ul>
+  <div id="hello-div" class="column is-8">
+    <h1>Hello and welcome to Columns &amp; Boxes!</h1>
+    <p>To get started add a page by typing a name and pressing the add button above.</p>
+    <p>Once you've created page's they will show up in the list to the left.</p>
+    <p>All of the data is stored using HTML 5 local storage and is available on this device only.</p>
+    <p>Enjoy Columns &amp; Boxes</p>
+
+  </div>
+</section>
+
+
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/pages_script.js"></script>
+</body>
+</html>
